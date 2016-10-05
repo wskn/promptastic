@@ -4,12 +4,15 @@
 # Patched fonts are special fonts best suited for terminals
 # True if the current terminal is using patched fonts (available at:
 # https://github.com/Lokaltog/powerline-fonts).
-PATCHED_FONTS = True
+PATCHED_FONTS = False
 
 # The theme defines the colors used to draw individual segments.
 # Themes are collected in the `themes` directory. Their names match their file name (w/o the file
 # extension .py).
 THEME = 'default'
+
+# Add a space at the start and at the end of the segments
+SPACES = True
 
 # Segments are the single elements which compose the Bash shell prompt.
 # Enable or disable these segments to customize what you see on the shell prompt.
