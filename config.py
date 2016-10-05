@@ -11,6 +11,9 @@ PATCHED_FONTS = True
 # extension .py).
 THEME = 'default'
 
+# Add a space at the start and at the end of the segments
+SPACES = True
+
 # Segments are the single elements which compose the Bash shell prompt.
 # Enable or disable these segments to customize what you see on the shell prompt.
 SEGMENTS = {
