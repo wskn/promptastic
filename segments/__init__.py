@@ -8,8 +8,7 @@ theme = importlib.import_module('themes.{}'.format(sys.get_current_theme_name())
 class Segment(object):
     bg = ''  # Default: no color.
     fg = ''  # Default: no color.
-    ls = False
-    rs = False
+    spaces = False # Default: no spaces.
 
     def __init__(self, *args, **kwargs):
         class_name = type(self).__name__.lower()
@@ -20,14 +19,9 @@ class Segment(object):
             # Other segments are active if the config files states so.
             self.active = config.SEGMENTS.get(class_name, False)
 
-        if( config.SPACES ):
+        if(config.SPACES):
             if class_name not in ['newline', 'root', 'divider', 'padding', 'exitcode']:
-                self.ls = True
-                self.rs = True
-
-            if(class_name == 'git'):
-                self.ls = True
-                self.rs = False
+                self.spaces = True
 
         if self.active:
             self.init(*args, **kwargs)
@@ -39,14 +33,11 @@ class Segment(object):
         output = list()
         output.append(self.bg)
         output.append(self.fg)
-        if(self.ls): output.append(' ')
-        output.append(self.text)
-        if(self.rs): output.append(' ')
+        output.append(' ' + self.text + ' ' if self.spaces else self.text)
         output.append(colors.reset() if self.bg or self.fg else '')
         return ''.join(output)
 
     def length(self):
         lenght = len(self.text)
-        if(self.ls): lenght+=1;
-        if(self.rs): lenght+=1;
+        if(self.spaces): lenght+=2;
         return lenght
